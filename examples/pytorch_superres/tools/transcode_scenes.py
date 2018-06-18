@@ -43,6 +43,10 @@ def downsample_scenes(master_data, resolution, codec, crf, keyint, quiet):
             res_str = '1280:720'
         elif resolution == '540p':
             res_str = '960:540'
+        elif resolution == '360p':
+            res_str = '640:360'
+        elif resolution == '240p':
+            res_str = '320:240'
         else:
             raise ValueError("Unknown resolution")
         res_args = ["-vf", "scale=%s" % res_str, "-sws_flags", "bilinear"]
@@ -93,5 +97,5 @@ if __name__=='__main__':
                         help="Suppress ffmpeg output")
     args = parser.parse_args()
     assert args.master_data is not None, 'Provide --master_data path to root data directory containing split scenes'
-    assert args.resolution in ['4K', '1080p', '720p', '540p'], '--resolution must be one of 1080p, 720p, 540p'
+    assert args.resolution in ['4K', '1080p', '720p', '540p', '360p', '240p'], '--resolution must be one of 1080p, 720p, 540p, 360p, 240p'
     downsample_scenes(**vars(args))

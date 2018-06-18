@@ -50,6 +50,10 @@ def extract_frames(master_data, resolution, format, q, quiet,
             res_str = '1280:720'
         elif resolution == '540p':
             res_str = '960:540'
+        elif resolution == '360p':
+            res_str = '640:360'
+        elif resolution == '240p':
+            res_str = '320:240'
         else:
             raise ValueError("Unknown resolution")
         res_args += ["-vf", "scale=%s" % res_str, "-sws_flags", "bilinear"]
@@ -92,7 +96,7 @@ if __name__=='__main__':
     parser.add_argument('--master_data', type=str, required=True,
                         help="Path to root data directory")
     parser.add_argument('--resolution', type=str, required=True,
-                        choices=['4K', '1080p', '720p', '540p'])
+                        choices=['4K', '1080p', '720p', '540p','360p','240p'])
     parser.add_argument('--format', type=str,
                         choices=['png', 'jpg'])
     parser.add_argument('-q', type=str,
